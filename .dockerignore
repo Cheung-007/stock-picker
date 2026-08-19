@@ -1,0 +1,9 @@
+.git/
+.venv/
+.run/
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+*.png
+*.command
