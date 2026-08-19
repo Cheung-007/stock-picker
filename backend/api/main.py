@@ -5,22 +5,14 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from backend.api import routes
 
 app = FastAPI(title="T+1 超短线选股系统", version="0.1.0")
 
-# 允许本地前端跨域访问
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+# 前端与 API 同源部署（FastAPI 托管 dist），无需跨域。
+# 不启用 CORS：避免任意第三方网站跨域读取数据或触发 /api/refresh 滥用数据源。
 app.include_router(routes.router)
 
 
